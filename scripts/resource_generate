@@ -1,0 +1,11 @@
+#!/bin/bash
+
+bundle exec rails g fae:scaffold Client   name:string email:string observations:text phone:string
+bundle exec rails g fae:scaffold Supplier name:string observations:text email:string phone:string
+bundle exec rails g fae:scaffold Product  title:string description:string hero_image:image price:decimal observations:text supplier:references
+bundle exec rails g fae:scaffold Service  title:string description:text price:integer hero_image:image observations:text
+bundle exec rails g fae:scaffold Discount title:string value:decimal
+bundle exec rails g fae:scaffold Campaign title:string body:text
+bundle exec rails g fae:scaffold Sell     total:decimal discount:references client:references observations:text status:integer date:date
+
+bundle exec rails db:migrate
