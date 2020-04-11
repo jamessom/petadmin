@@ -10,6 +10,7 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   redis:
+    container_name: redis
     image: 'redis:3.2-alpine'
     command: redis-server
     ports:
@@ -18,6 +19,7 @@ services:
       - 'redis:/var/lib/redis/data'
 
   jobs:
+    container_name: jobs
     depends_on:
       - 'postgres'
       - 'redis'
@@ -44,11 +46,13 @@ services:
     - box
 
   box:
+    container_name: box
     image: busybox
     volumes:
       - /box
 
   mailcatcher:
+    container_name: mailcatcher
     image: tophfr/mailcatcher
     ports:
       - '1025:25'
