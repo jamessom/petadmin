@@ -12,6 +12,8 @@ class Sell < ApplicationRecord
   has_many :sell_services
   has_many :services, through: :sell_services
 
+  before_save :set_total
+
   enum status: { finished: 0, canceled: 1 }
 
   def fae_display_field
@@ -20,5 +22,18 @@ class Sell < ApplicationRecord
 
   def self.for_fae_index
     order(:id)
+  end
+
+  def set_total
+    total = 0
+    self.products.each { |product| total += product.price }
+    self.services.each { |service| total += service.price }
+
+    if self.discount.present?
+      total -= self.discount.value
+    end
+
+    total = (total >= 0) ? total : 0
+    self.total = total
   end
 end
