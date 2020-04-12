@@ -3,6 +3,9 @@ class Sell < ApplicationRecord
 
   validates :client, presence: true
 
+  belongs_to :discount
+  belongs_to :client
+
   has_many :sell_products
   has_many :products, through: :sell_products
 
@@ -18,7 +21,4 @@ class Sell < ApplicationRecord
   def self.for_fae_index
     order(:id)
   end
-
-  belongs_to :discount
-  belongs_to :client
 end
