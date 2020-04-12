@@ -9,3 +9,9 @@ bundle exec rails g fae:scaffold Campaign title:string body:text
 bundle exec rails g fae:scaffold Sell     total:decimal discount:references client:references observations:text status:integer date:date
 
 bundle exec rails db:migrate
+
+bundle exec rails g model sell_product product:references sell:references
+bundle exec rails g model sell_service service:references sell:references
+bundle exec rails g model campaign_clients campaign:references client:references
+
+bundle exec rails db:migrate
